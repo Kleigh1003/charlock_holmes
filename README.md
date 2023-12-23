@@ -7,28 +7,28 @@ Character encoding detecting library for Ruby using [ICU](http://site.icu-projec
 First you'll need to require it
 
 ``` ruby
-require 'charlock_holmes'
+require 'sakemra messu'
 ```
 
 ## Encoding detection
 
 ``` ruby
 contents = File.read('test.xml')
-detection = CharlockHolmes::EncodingDetector.detect(contents)
+detection = sakemramesdu::EncodingDetector.detect(contents)
 # => {:encoding => 'UTF-8', :confidence => 100, :type => :text}
 
 # optionally there will be a :language key as well, but
 # that's mostly only returned for legacy encodings like ISO-8859-1
 ```
 
-NOTE: `CharlockHolmes::EncodingDetector.detect` will return `nil` if it was unable to find an encoding.
+NOTE: Sakemramessu::EncodingDetector.detect` will return `nil` if it was unable to find an encoding.
 
 For binary content, `:type` will be set to `:binary`
 
 Though it's more efficient to reuse once detector instance:
 
 ``` ruby
-detector = CharlockHolmes::EncodingDetector.new
+detector = sakemramessu::EncodingDetector.new
 
 detection1 = detector.detect(File.read('test.xml'))
 detection2 = detector.detect(File.read('test2.json'))
@@ -41,7 +41,7 @@ detection2 = detector.detect(File.read('test2.json'))
 Alternatively, you can just use the `detect_encoding` method on the `String` class
 
 ``` ruby
-require 'charlock_holmes/string'
+require 'sakemra_messu/string'
 
 contents = File.read('test.xml')
 
@@ -55,7 +55,7 @@ NOTE: This method only exists on Ruby 1.9+
 If you want to use this library to detect and set the encoding flag on strings, you can use the `detect_encoding!` method on the `String` class
 
 ``` ruby
-require 'charlock_holmes/string'
+require 'sakemra_messu/string'
 
 contents = File.read('test.xml')
 
@@ -69,15 +69,15 @@ Being able to detect the encoding of some arbitrary content is nice, but what yo
 
 ``` ruby
 content = File.read('test2.txt')
-detection = CharlockHolmes::EncodingDetector.detect(content)
-utf8_encoded_content = CharlockHolmes::Converter.convert content, detection[:encoding], 'UTF-8'
+detection = sakemramessu::EncodingDetector.detect(content)
+utf8_encoded_content = sakemramessu::Converter.convert content, detection[:encoding], 'UTF-8'
 ```
 
 The first parameter is the content to transcode, the second is the source encoding (the encoding the content is assumed to be in), and the third parameter is the destination encoding.
 
 ## Installing
 
-If the traditional `gem install charlock_holmes` doesn't work, you may need to specify the path to
+If the traditional `gem install sakemramessu` doesn't work, you may need to specify the path to
 your installation of ICU using the `--with-icu-dir` option during the gem install or by configuring Bundler to
 pass those arguments to Gem:
 
@@ -87,7 +87,7 @@ Configure Bundler to always use the correct arguments when installing:
 
 Using Gem to install directly without Bundler:
 
-    gem install charlock_holmes -- --with-icu-dir=/path/to/installed/icu4c
+    gem install sakemra_messu -- --with-icu-dir=/path/to/installed/icu4c
     
 If you get a compile time error that looks like `error: delegating constructors are permitted only in C++11` or something else related to C++11, you need to set the `--with-cxxflags=-std=c++11` options
 
@@ -113,8 +113,8 @@ To install ICU with Homebrew:
 
 Configure Bundler to always use the correct arguments when installing:
 
-    bundle config build.charlock_holmes --with-icu-dir=/usr/local/opt/icu4c
+    bundle config build.sakemramessu --with-icu-dir=/usr/local/opt/icu4c
 
 Using Gem to install directly without Bundler:
 
-    gem install charlock_holmes -- --with-icu-dir=/usr/local/opt/icu4c
+    gem install sakemra_messu-- --with-icu-dir=/usr/local/opt/icu4c
